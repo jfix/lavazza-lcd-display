@@ -9,8 +9,12 @@ const app = express()
 app.use(express.static(path.join(__dirname, 'assets')))
 app.set('view engine', 'pug')
 
-app.listen(process.env.HTTP_PORT, () => {
-  console.log(`✓ Server is now listening.`)
+app.listen(process.env.HTTP_PORT, (e, r) => {
+  if (e) {
+    console.log(`an error occurred: ${e}`)
+  } else {
+    console.log(`✓ Server is now listening.`)
+  }
 })
 
 app.get('/', function (req, res) {
