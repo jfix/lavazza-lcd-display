@@ -9,9 +9,9 @@ const app = express()
 app.use(express.static(path.join(__dirname, 'assets')))
 app.set('view engine', 'pug')
 
-app.listen(process.env.HTTP_PORT, (e, r) => {
+app.listen(process.env.PORT || 5000, (e, r) => {
   if (e) {
-    console.log(`an error occurred: ${e}`)
+    console.log(`✗ Error encountered: ${e}.`)
   } else {
     console.log(`✓ Server is now listening.`)
   }
