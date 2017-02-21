@@ -2,11 +2,15 @@ const express = require('express')
 //const MongoClient = require('mongodb').MongoClient
 const path = require('path')
 require('dotenv').config({path: path.join(__dirname, '.env')})
+const emojiFavicon = require('emoji-favicon')
+
 require('pug')
 const request = require('request')
 
 const app = express()
 app.use(express.static(path.join(__dirname, 'assets')))
+app.use(emojiFavicon('coffee'))
+
 app.set('view engine', 'pug')
 
 app.listen(process.env.PORT || 5000, (e, r) => {
