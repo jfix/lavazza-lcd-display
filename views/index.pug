@@ -1,7 +1,28 @@
 link(rel='stylesheet', href='css/style.css', type='text/css')
-meta(http-equiv='refresh' content='8')
 
 div#total #{total}
 div.byline coffees served
 div.byline since 26 Jan 2017
 
+script(src='//code.jquery.com/jquery-2.2.4.min.js')
+script.
+    function update() {
+        var current = $('#total').text()
+        console.log(current)
+        $.ajax({
+            url: '/total',
+            success: function(data) {
+                if(data.total && data.total != current){
+                    $('#total').text(data.total)
+                }
+            },
+            error: function () {
+                $('#total').text(':-(')
+            },
+            complete: function() {
+                setTimeout(function () { update() }, 3000)
+            }
+        })
+    }
+script.
+    update()
