@@ -1,5 +1,5 @@
 const express = require('express')
-// const MongoClient = require('mongodb').MongoClient
+const Conso = require('./models/conso')
 const path = require('path')
 require('dotenv').config({path: path.join(__dirname, '.env')})
 const emojiFavicon = require('emoji-favicon')
@@ -32,21 +32,17 @@ app.get('/wally', function (req, res) {
   res.send({ total: Math.floor(Math.random() * 10000) + 1 })
 })
 
-/* get the actual value from Mongo */
+/* get the total number of coffees from Mongo */
 app.get('/total', function (req, res) {
-  const mlabUrl = `${process.env.MLAB_URL}${process.env.MONGO_DB}/collections/${process.env.MONGO_COLLECTION}?c=true&apiKey=${process.env.MLAB_APIKEY}`
-  console.log(`Accessing this URL: ${mlabUrl}.`)
-  request.get({
-    url: mlabUrl
-  }, function (err, resp, body) {
-    if (err) {
-      (err) => console.log(`ERROR: ${err}`)
-    } else {
-      res.setHeader('Content-Type', 'application/json')
-      res.send({ total: body })
+  Conso.count({})
+  .then((number) => {
+    res.setHeader('Content-Type', 'application/json')
+    res.send({ total: number })
 
-      const d = new Date()
-      console.log(`✓ ${d.toDateString()} ${d.toTimeString()} served a request for ${body} coffees.`)
-    }
+    const d = new Date()
+    console.log(`✓ ${d.toDateString()} ${d.toTimeString()} served a request for ${number} coffees.`)
+  })
+  .catch((err) => {
+    console.log(`ERROR: ${err}`)
   })
 })
