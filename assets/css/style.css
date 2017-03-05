@@ -3,6 +3,7 @@ body {
   background-color: black;
   font-family: monospace;
 }
+
 div#total {
   color: yellow;
   text-align: center;
@@ -16,4 +17,18 @@ div.byline {
   color: white;
   font-weight: bold;
   font-size: 150%;
+}
+
+div#lottery {
+  margin-top: 2em;
+  color: yellow;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: bold;
+  font-size: 150%;
+}
+
+div#lottery span.number {
+  color: black;
+  background-color: yellow;
 }
