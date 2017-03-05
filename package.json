@@ -4,9 +4,11 @@
   "description": "A tiny web app that gets started when the Raspberry Pi boots up to display basic information about our coffee consumption. Is related to the dash-button project that adds coffee consumptions to the database.",
   "main": "server.js",
   "scripts": {
+    "build": "webpack",
     "dev": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress"
   },
   "author": "jfix",
   "license": "ISC",
@@ -15,12 +17,17 @@
     "dotenv": "^4.0.0",
     "emoji-favicon": "^0.3.0",
     "express": "^4.14.1",
+    "jquery": "^3.1.1",
+    "js-cookie": "^2.1.3",
+    "moment": "^2.17.1",
     "mongoose": "^4.8.5",
     "pug": "^2.0.0-beta11",
     "q": "^1.4.1",
     "request": "^2.79.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "webpack": "^2.2.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jfix/lavazza-lcd-display.git"
