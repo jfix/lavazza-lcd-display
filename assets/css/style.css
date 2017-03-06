@@ -2,6 +2,7 @@ body {
   margin: 4em;
   background-color: black;
   font-family: monospace;
+  overflow: hidden;
 }
 
 div#total {
@@ -20,7 +21,7 @@ div.byline {
 }
 
 div#lottery {
-  margin-top: 2em;
+  margin-top: 1em;
   color: yellow;
   text-align: center;
   vertical-align: middle;
