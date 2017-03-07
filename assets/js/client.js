@@ -44,10 +44,11 @@ function update () {
         // TODO: play sound
         // flash screen
         startFlashing()
+        // TODO: Slack Notification
       }
       // 3) after the winning ticket (Cookie)
       if (Cookies.get('lucky-number') && data.total !== data.lucky) {
-        $('#lottery').html('This week\'s winning number was <span class=\'number\'>' + Cookies.get('lucky-number') + '</span>!! 🤑')
+        $('#lottery').html('This week\'s winning number was <span class=\'number\'>' + Cookies.get('lucky-number') + '</span>!!')
         if (flash) stopFlashing(flash)
       }
     },
