@@ -6,5 +6,5 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'assets/js')
   },
-  devtool: 'cheap-eval-source-map'
+  devtool: 'cheap-module-source-map'
 }
