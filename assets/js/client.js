@@ -1,7 +1,8 @@
 import $ from 'jquery'
 import phrases from './phrases.js'
 
-let flash, justOnce
+let flash
+let justOnce = false
 
 function startFlashing () {
   let bgColor = 'black'
@@ -62,11 +63,8 @@ function update () {
     success: function (data) {
       // if the value has changed
       if (data.total && data.total !== parseInt(current)) {
-        const speaker = 'French Female'
-        const prelude = 'Et maintenant la phrase du jour: -- '
         const phrase = phrases[Math.floor(Math.random() * phrases.length)]
-        // responsiveVoice.speak(`You have just received coffee number ${data.total}. Enjoy it responsibly!`, speaker, {rate: 0.9})
-        responsiveVoice.speak(prelude + phrase, speaker)
+        responsiveVoice.speak('Et maintenant la phrase du jour: -- ' + phrase, 'French Female')
 
         // update overall total display
         $('#total').text(data.total)
