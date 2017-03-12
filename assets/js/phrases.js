@@ -30,7 +30,7 @@ module.exports = [
   'Je voudrais un hot dog sans pain s\'il vous plaît.',
   'La stagiaire hurle sur sa mère au téléphone dans l\'open space, en la traitant de débile mentale, et la mère rappelle en s\'excusant.',
   'C\'est difficile d\'être une femme mais c\'est tellement mieux que d\'être un homme.',
-  'Elle a été virée de la réunion pour avoir prononcé sérieusement le mot marketing.',
+  'Elle a été virée de la réunion pour avoir prononcé sérieusement le mot "marketing".',
   'Je ne mets pas ma vie sur Instagram . Les gens ne pourraient pas suivre.',
   'Ma grand mère m\'a dit si tu oublies de suivre tes rêves je te jure que je reviendrai te réveiller et elle est morte dans la nuit.',
   'Hier j\'avais tellement faim je me suis fait un Bloody Mary.',
