@@ -8,7 +8,7 @@
     "dev": "npm run build && npm run start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress"
+    "heroku-postbuild": "webpack --config ./webpack.config.js --progress"
   },
   "author": "jfix",
   "license": "ISC",
