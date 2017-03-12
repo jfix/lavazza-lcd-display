@@ -1,8 +1,7 @@
 import $ from 'jquery'
-import Cookies from 'js-cookie'
-import moment from 'moment'
+import phrases from './phrases.js'
 
-let flash
+let flash, justOnce
 
 function startFlashing () {
   let bgColor = 'black'
@@ -23,33 +22,56 @@ function stopFlashing (id) {
   $('body').css('background-color', 'black')
   $('#total').css('color', 'yellow')
   $('#lottery').css('color', 'yellow')
+  // FIXME dirty workaround
+  window.location.reload()
+}
+
+function lotteryWinner (data) {
+  if (data.lucky === data.total) {
+    $('#lottery').html(`<span class='number'>${data.lucky}</span> is the winning number!! 🤑`)
+    document.getElementById('winner').play()
+    startFlashing()
+    notifySlack(data.lucky)
+  } else {
+    if (flash) stopFlashing(flash)
+  }
+  if (data.lucky < data.total) {
+    if (flash) stopFlashing(flash)
+    $('#lottery').html(`This week's winning number was <span class='number'>${data.lucky}</span>!!`)
+  }
+}
+
+function notifySlack (number) {
+  if (!justOnce) {
+    console.log('about to notify slack: ' + number)
+    $.post({
+      url: '/notify-winner-slack',
+      data: JSON.stringify({ 'number': number }),
+      contentType: 'application/json',
+      success: () => (justOnce = true),
+      error: () => (justOnce = true)
+    })
+  }
 }
 
 function update () {
   const current = $('#total').text()
-  console.log(current)
+
   $.ajax({
     url: '/total',
     success: function (data) {
-      if (data.total && data.total !== current) {
-        $('#total').text(data.total)
-      }
-      // 1) before the winning ticket (no Cookie)
-      if (flash) stopFlashing(flash)
+      // if the value has changed
+      if (data.total && data.total !== parseInt(current)) {
+        const speaker = 'French Female'
+        const prelude = 'Et maintenant la phrase du jour: -- '
+        const phrase = phrases[Math.floor(Math.random() * phrases.length)]
+        // responsiveVoice.speak(`You have just received coffee number ${data.total}. Enjoy it responsibly!`, speaker, {rate: 0.9})
+        responsiveVoice.speak(prelude + phrase, speaker)
 
-      // 2) during the winning ticket (data.lucky)
-      if (data.lucky === data.total) {
-        Cookies.set('lucky-number', data.lucky, { expires: moment().day(7).toDate() })
-        $('#lottery').html('<span class=\'number\'>' + data.lucky + '</span> is the winning number!! 🤑')
-        // TODO: play sound
-        // flash screen
-        startFlashing()
-        // TODO: Slack Notification
-      }
-      // 3) after the winning ticket (Cookie)
-      if (Cookies.get('lucky-number') && data.total !== data.lucky) {
-        $('#lottery').html('This week\'s winning number was <span class=\'number\'>' + Cookies.get('lucky-number') + '</span>!!')
-        if (flash) stopFlashing(flash)
+        // update overall total display
+        $('#total').text(data.total)
+        // do we have a flash?
+        lotteryWinner(data)
       }
     },
     error: function () {
