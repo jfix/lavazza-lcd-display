@@ -46,8 +46,8 @@ app.get('/total', function (req, res) {
     .then((doc) => doc.ticketNumber)
     .then((lucky) => {
       res.setHeader('Content-Type', 'application/json')
-      res.send({total: 612, lucky: 614})
-      // res.send({total, lucky})
+      // res.send({total: 612, lucky: 614})
+      res.send({total, lucky})
 
       const d = new Date()
       console.log(`✓ ${d.toDateString()} ${d.toTimeString()} served a request for ${total} coffees.`)
