@@ -1,8 +1,28 @@
 import $ from 'jquery'
 import phrases from './phrases.js'
-
+import slick from '../vendor/slick/slick.min.js'
 let flash
 let justOnce = false
+
+$(document).ready(function () {
+  startTime()
+  $('.slider').slick({
+    autoplay: true,
+    arrows: false,
+    dots: false
+  })
+})
+
+function startTime () {
+  const today = new Date()
+  let h = today.getHours()
+  let m = today.getMinutes()
+  let s = today.getSeconds()
+  m = (m < 10) ? m = '0' + m : m
+  s = (s < 10) ? s = '0' + s : s
+  document.getElementById('time').innerHTML = h + ':' + m + ':' + s
+  setTimeout(startTime, 500)
+}
 
 function startFlashing () {
   let bgColor = 'black'
