@@ -63,12 +63,17 @@ function update () {
     success: function (data) {
       // if the value has changed
       if (data.total && data.total !== parseInt(current)) {
-        const phrase = phrases[Math.floor(Math.random() * phrases.length)]
-        responsiveVoice.speak('Et maintenant la phrase du jour: -- ' + phrase, 'French Female')
+        document.title = `${data.total} coffees served`
+        if (responsiveVoice) {
+          const phrase = phrases[Math.floor(Math.random() * phrases.length)]
+          responsiveVoice.speak('Et maintenant la phrase du jour: -- ' + phrase, 'French Female')
+        } else {
+          console.log('ERROR: responsiveVoice was not found!')
+        }
 
         // update overall total display
         $('#total').text(data.total)
-        // do we have a flash?
+        // do we have a winner?
         lotteryWinner(data)
       }
     },
