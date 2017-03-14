@@ -43,3 +43,13 @@ div#lottery span.number {
   color: black;
   background-color: yellow;
 }
+
+div#rs-licence, div#rs-licence a {
+  color: white;
+}
+/* on tiny devices hide licence */
+@media (max-height: 350px) {
+  div#rs-licence {
+    display: none;
+  }
+}
