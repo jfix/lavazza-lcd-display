@@ -1,6 +1,8 @@
 import $ from 'jquery'
 import phrases from './phrases.js'
-import slick from '../vendor/slick/slick.min.js'
+import '../vendor/slick/slick.min.js'
+import { responsiveVoice } from '../vendor/responsivevoice/responsivevoice.js'
+
 let flash
 let justOnce = false
 
@@ -9,7 +11,9 @@ $(document).ready(function () {
   $('.slider').slick({
     autoplay: true,
     arrows: false,
-    dots: false
+    dots: false,
+    fade: true,
+    speed: 600
   })
 })
 
