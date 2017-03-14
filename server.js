@@ -57,7 +57,7 @@ app.get('/total', function (req, res) {
 })
 
 app.post('/notify-winner-slack', (req, res) => {
-  const slackOptions = { defaults: { username: 'Lavazza Winneur !!!', channel: '#test', icon_emoji: ':trophy:' } }
+  const slackOptions = { defaults: { username: 'Lavazza Winneur !!!', channel: '#random', icon_emoji: ':trophy:' } }
   const slack = new SlackWebhook(process.env.SLACK_WEBHOOK, slackOptions)
 
   slack.send(`And this week's winner is number .... :tada: *${req.body.number}*!\nCongratulations, come and get your free :coffee: :coffee:!`)
