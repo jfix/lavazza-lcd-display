@@ -1852,7 +1852,7 @@ else
       return eval("typeof xy === 'undefined'")
     }
     ;
-    a.fallbackServicePath = "https://code.responsivevoice.org/" + (a.tstCompiled() ? "" : "develop/") + "getvoice.php";
+    a.fallbackServicePath = "//code.responsivevoice.org/" + (a.tstCompiled() ? "" : "develop/") + "getvoice.php";
     a.default_rv = a.responsivevoices[0];
     a.debug = !1;
     a.rvsMapped = !1;
