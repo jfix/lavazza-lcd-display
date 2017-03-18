@@ -1,7 +1,10 @@
+import Chart from 'chart.js'
 import $ from 'jquery'
-import phrases from './phrases.js'
 import '../vendor/slick/slick.min.js'
 import { responsiveVoice } from '../vendor/responsivevoice/responsivevoice.js'
+
+import phrases from './phrases'
+import drawHistogram from './ten-day'
 
 let flash
 let justOnce = false
@@ -83,14 +86,14 @@ function update () {
   const current = $('#total').text()
 
   $.ajax({
-    url: '/total',
+    url: '/data',
     success: function (data) {
       // if the value has changed
       if (data.total && data.total !== parseInt(current)) {
         document.title = `${data.total} coffees served`
         if (responsiveVoice) {
           const phrase = phrases[Math.floor(Math.random() * phrases.length)]
-          responsiveVoice.speak('Et maintenant la phrase du jour: -- ' + phrase, 'French Female')
+          responsiveVoice.speak(`Et maintenant la phrase du café ${data.total}: -- ` + phrase, 'French Female')
         } else {
           console.log('ERROR: responsiveVoice was not found!')
         }
@@ -99,6 +102,7 @@ function update () {
         $('#total').text(data.total)
         // do we have a winner?
         lotteryWinner(data)
+        drawHistogram(data.tenDays)
       }
     },
     error: function () {

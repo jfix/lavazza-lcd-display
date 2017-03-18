@@ -7,7 +7,10 @@ require('./models/db')
 const mongoose = require('mongoose')
 const SlackWebhook = require('slack-webhook')
 
-const Conso = mongoose.model('Conso')
+const conso = require('./models/conso')
+const Conso = conso.Conso
+const tenDayAggregation = conso.tenDayAggregation
+
 const LotteryTicket = mongoose.model('LotteryTicket')
 const emojiFavicon = require('emoji-favicon')
 require('pug')
@@ -38,22 +41,35 @@ app.get('/wally', function (req, res) {
   res.send({ total: Math.floor(Math.random() * 10000) + 1 })
 })
 
-/* get the total number of coffees from Mongo */
-app.get('/total', function (req, res) {
-  Conso.count({})
-  .then((total) => {
-    LotteryTicket.findOne().sort({date: -1})
-    .then((doc) => doc.ticketNumber)
-    .then((lucky) => {
-      res.setHeader('Content-Type', 'application/json')
-      // res.send({total: 612, lucky: 614})
-      res.send({total, lucky})
+// TODO: move this in a different module
 
-      const d = new Date()
-      console.log(`✓ ${d.toDateString()} ${d.toTimeString()} served a request for ${total} coffees.`)
-    })
+async function query () {
+  const totalCount = Conso.count()
+  const luckyNumber = LotteryTicket.findOne().sort({date: -1})
+  const tenDayStats = Conso.aggregate(tenDayAggregation)
+
+  let total, lucky, tenDays
+  try {
+    [total, lucky, tenDays] = await Promise.all([
+      totalCount.exec().catch(reason => console.error(reason)),
+      luckyNumber.exec().catch(reason => console.error(reason)),
+      tenDayStats.exec().catch(reason => console.error(reason))
+    ])
+  } catch (e) {
+    console.error('ERROR IN query: ' + JSON.stringify(e))
+  }
+  return {
+    total,
+    lucky: lucky.ticketNumber,
+    tenDays
+  }
+}
+// get some data points from Mongo
+app.get('/data', function (req, res) {
+  query().then(data => {
+    res.setHeader('Content-Type', 'application/json')
+    res.send(data)
   })
-  .catch((err) => console.log(`ERROR: ${err}`))
 })
 
 app.post('/notify-winner-slack', (req, res) => {
