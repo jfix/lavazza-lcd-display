@@ -36,5 +36,20 @@ module.exports = [
   'Hier j\'avais tellement faim je me suis fait un Bloody Mary.',
   'Une San Pellegrino s\'il vous plaît. - On n\'a pas. - Alors une vodka tonic.',
   'J\'ai une envie de smoothie aux frites.',
-  'Cette boite tourne au cafeine et a l\'espoir des stagiaires.'
+  'Cette boite tourne au cafeine et a l\'espoir des stagiaires.',
+  'Il a du faire une drôle de tête le premier homme qui a fait caca !',
+  'On s\'en fout pas mal que le poulet soit élevé au bon air, après tout on ne mange pas les poumons.',
+  'Chaque jour, t\'as 30 morts sur la route. Moi je vais rouler sur le trottoir.',
+  'Ça revient, la mode du cheval. On en a encore mangé ce midi.',
+  'On dit que le haricot fait péter... nuance : le haricot digéré fait péter.',
+  'Le papier collant, c\'est du papier avec de la colle dessus. Tu peux en faire toi-même !',
+  'C\'est avec le nerf optique qu\'on voit. L\'oeil c\'est juste pour regarder.',
+  'Le haricot fait péter... c\'est-à-dire que même si tu penses à autre chose ça fait péter...',
+  '40 % des accidents sont provoqués par l\'alcool, ça veut dire que les 60 % sont des buveurs d\'eau.',
+  'Quand tu rêves d\'un saucisson, c\'est sexuel mais pas le pâté !',
+  'Les moutons sont cons c\'est pour ça que leur cervelle n\'ont pas de goût...',
+  'Il faut pas trop parler le matin sinon l\'après-midi on sait plus quoi dire.',
+  'Je vois pas du tout à quoi ça sert les ongles de pied.',
+  'Si le téléphone ne sonne pas, ça ne sert à rien de le laisser brancher...',
+  'Les flamants roses ont des grosses couilles mais sous les plumes on les voit pas bien.'
 ]
