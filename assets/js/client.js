@@ -100,6 +100,8 @@ function update () {
 
         // update overall total display
         $('#total').text(data.total)
+        $('#today-value').text(data.today)
+        $('#yesterday-value').text(data.yesterday)
         // do we have a winner?
         lotteryWinner(data)
         drawHistogram(data.tenDays)
@@ -109,7 +111,7 @@ function update () {
       $('#total').text(':-(')
     },
     complete: function () {
-      setTimeout(function () { update() }, 3000)
+      setTimeout(function () { update() }, 4000)
     }
   })
 }

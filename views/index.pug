@@ -2,6 +2,17 @@ link(rel='stylesheet', href='css/style.css', type='text/css')
 link(rel='stylesheet', href='vendor/slick/slick.css', type='text/css')
 
 div.slider
+  div#slide-0
+    div.daily
+      span#yesterday Y'day
+        |
+        |
+        span#yesterday-value #{yesterday}
+      span#today Today
+        |
+        |
+        span#today-value  #{today}
+
   div#slide-1
     h1#total #{total}
     div.byline coffees served
