@@ -4,7 +4,7 @@ require('dotenv').config({path: path.join(__dirname, '.env')})
 const bodyParser = require('body-parser')
 const express = require('express')
 require('./models/db')
-const moment = require('moment')
+const moment = require('moment-timezone')
 const mongoose = require('mongoose')
 const SlackWebhook = require('slack-webhook')
 
@@ -69,7 +69,8 @@ async function query () {
 app.get('/data', function (req, res) {
   query().then(data => {
     const last = data.tenDays[data.tenDays.length - 1] // count, date, weekday
-    if (moment(new Date()).isSame(last.date, 'day')) {
+    const now = moment().tz('Europe/Paris')
+    if (now.isSame(last.date, 'day')) {
       data.today = last.count
       data.yesterday = data.tenDays[data.tenDays.length - 2].count
     } else {
