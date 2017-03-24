@@ -51,5 +51,19 @@ module.exports = [
   'Il faut pas trop parler le matin sinon l\'après-midi on sait plus quoi dire.',
   'Je vois pas du tout à quoi ça sert les ongles de pied.',
   'Si le téléphone ne sonne pas, ça ne sert à rien de le laisser brancher...',
-  'Les flamants roses ont des grosses couilles mais sous les plumes on les voit pas bien.'
+  'Les flamants roses ont des grosses couilles mais sous les plumes on les voit pas bien.',
+  'Un narcissique, c\'est quelqu\'un qui ne veut pas m\'admirer.',
+  'Mozart était tellement précoce qu\'à 35 ans il était déjà mort.',
+  'Les calories sont des petits monstres, qui s\'introduisent la nuit dans votre garde-robes, et qui rétrécissent vos vêtements',
+  'Les enfants, c\'est comme les pets. Il n\'y a que les siens qu\'on peut supporter.',
+  'On peut rire de tout, mais pas avec n\'importe qui.',
+  'Un jour j\'irai vivre en Théorie, car en Théorie tout se passe bien.',
+  'L\'intelligence, c\'est le seul outil qui permette à l\'homme de mesurer l\'étendue de son malheur.',
+  'Il vaut mieux se taire et passer pour un con plutôt que de parler et de ne laisser aucun doute sur le sujet.',
+  'Il est plus économique de lire Minute que Sartre. Pour le prix d\'un journal on a à la fois La nausée et Les mains sales.',
+  'La médecine du travail est la preuve que le travail est bien une maladie !',
+  'L\'ennemi est bête : il croit que l\'ennemi c\'est nous, alors que l\'ennemi c\'est lui.',
+  'L\'âge mûr, par définition, c\'est la période de la vie qui précède l\'âge pourri.',
+  'Quand un philosophe me répond, je ne comprends plus ma question.',
+  'L\'amour -- il y a ceux qui en parlent et il y a ceux qui le font. À partir de quoi il m\'apparaît urgent de me taire.'
 ]
