@@ -65,7 +65,7 @@ const drawHistogram = function (data) {
   })
   const insideFontColor = '0,0,0'
   const outsideFontColor = '255,255,0'
-  const topThreshold = 200
+  const topThreshold = 20
   const modifyCtx = function (ctx) {
     ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize + 5, 'bold', Chart.defaults.global.defaultFontFamily)
     ctx.textAlign = 'center'
