@@ -1,6 +1,5 @@
 module.exports = [
   'Wooden chair.  Maria is mad at me because I wooden chair my tacos!',
-  'Harass. Donald Trump whooped harass!',
   'U S Mail. Man, wipe your ass U S Mail like dog shit!',
   'Ice Mocha. I have a bad memory because Ice Mocha lot of weed!',
   'Bishop. My girlfriend got drunk on tequila and fell down, so I had to pick that bishop!',
