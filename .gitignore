@@ -3,3 +3,6 @@ node_modules/*
 assets/js/bundle.js
 npm-debug.log
 *.js.map
+10-day-query-mongo.json
+chart.html
+chart.js
