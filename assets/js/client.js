@@ -93,7 +93,7 @@ function update () {
         document.title = `${data.total} coffees served`
         if (responsiveVoice) {
           const phrase = phrases[Math.floor(Math.random() * phrases.length)]
-          responsiveVoice.speak(`And here is a Putin fact to go with coffee ${data.total}: -- ` + phrase, 'US English Male')
+          responsiveVoice.speak(`And here is a Putin fact to go with coffee ${data.total.toLocaleString()}: -- ` + phrase, 'US English Male')
         } else {
           console.log('ERROR: responsiveVoice was not found!')
         }
