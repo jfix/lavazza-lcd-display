@@ -3,7 +3,7 @@ import $ from 'jquery'
 import '../vendor/slick/slick.min.js'
 import { responsiveVoice } from '../vendor/responsivevoice/responsivevoice.js'
 
-import phrases from './putinfacts'
+import phrases from './cent-raisons'
 import drawHistogram from './ten-day'
 
 let flash
@@ -93,7 +93,7 @@ function update () {
         document.title = `${data.total} coffees served`
         if (responsiveVoice) {
           const phrase = phrases[Math.floor(Math.random() * phrases.length)]
-          responsiveVoice.speak(`And here is a Putin fact to go with coffee ${data.total.toLocaleString()}: -- ` + phrase, 'US English Male')
+          responsiveVoice.speak(`Et pour ce café ${data.total.toLocaleString()}, voila une raison d'aimer votre travail: -- Raison ${phrase}`, 'French Female')
         } else {
           console.log('ERROR: responsiveVoice was not found!')
         }
