@@ -87,6 +87,7 @@ function update () {
 
   $.ajax({
     url: '/data',
+    cache: false,
     success: function (data) {
       // if the value has changed
       if (data.total && data.total !== parseInt(current)) {
