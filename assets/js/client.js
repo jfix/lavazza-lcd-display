@@ -1,5 +1,6 @@
 import Chart from 'chart.js'
 import $ from 'jquery'
+import moment from 'moment'
 import '../vendor/slick/slick.min.js'
 import { responsiveVoice } from '../vendor/responsivevoice/responsivevoice.js'
 
@@ -21,13 +22,7 @@ $(document).ready(function () {
 })
 
 function startTime () {
-  const today = new Date()
-  let h = today.getHours()
-  let m = today.getMinutes()
-  let s = today.getSeconds()
-  m = (m < 10) ? m = '0' + m : m
-  s = (s < 10) ? s = '0' + s : s
-  document.getElementById('time').innerHTML = h + ':' + m + ':' + s
+  document.getElementById('time').innerHTML = moment().format('HH:mm:ss')
   setTimeout(startTime, 500)
 }
 
@@ -82,39 +77,53 @@ function notifySlack (number) {
   }
 }
 
+function officeHours () {
+  const now = moment()
+  if (now.weekday() === 6 /* Saturday */ ||
+    now.weekday() === 0 /* Sunday */ ||
+    now.hours() < 6 || /* before 6am */
+    now.hours() > 21 /* after 9pm */) {
+    return false
+  }
+  return true
+}
+
 function update () {
-  const current = $('#total').text()
+  if (!officeHours()) {
+    setTimeout(() => { update() }, (10 * 60 * 1000)) /* wait ten minutes */
+  } else {
+    const current = $('#total').text()
+    $.ajax({
+      url: '/data',
+      cache: false,
+      success: function (data) {
+        // if the value has changed
+        if (data.total && data.total !== parseInt(current)) {
+          document.title = `${data.total} coffees served`
+          if (responsiveVoice) {
+            const phrase = phrases[Math.floor(Math.random() * phrases.length)]
+            responsiveVoice.speak(`Et pour ce café ${data.total}, voila une raison d'aimer votre travail: -- Raison ${phrase}`, 'French Female')
+          } else {
+            console.log('ERROR: responsiveVoice was not found!')
+          }
 
-  $.ajax({
-    url: '/data',
-    cache: false,
-    success: function (data) {
-      // if the value has changed
-      if (data.total && data.total !== parseInt(current)) {
-        document.title = `${data.total} coffees served`
-        if (responsiveVoice) {
-          const phrase = phrases[Math.floor(Math.random() * phrases.length)]
-          responsiveVoice.speak(`Et pour ce café ${data.total}, voila une raison d'aimer votre travail: -- Raison ${phrase}`, 'French Female')
-        } else {
-          console.log('ERROR: responsiveVoice was not found!')
+          // update overall total display
+          $('#total').text(data.total)
+          $('#today-value').text(data.today)
+          $('#yesterday-value').text(data.yesterday)
+          // do we have a winner?
+          lotteryWinner(data)
+          drawHistogram(data.tenDays)
         }
-
-        // update overall total display
-        $('#total').text(data.total)
-        $('#today-value').text(data.today)
-        $('#yesterday-value').text(data.yesterday)
-        // do we have a winner?
-        lotteryWinner(data)
-        drawHistogram(data.tenDays)
+      },
+      error: function () {
+        $('#total').text(':-(')
+      },
+      complete: function () {
+        setTimeout(function () { update() }, 4000)
       }
-    },
-    error: function () {
-      $('#total').text(':-(')
-    },
-    complete: function () {
-      setTimeout(function () { update() }, 4000)
-    }
-  })
+    })
+  }
 }
 
 update()
