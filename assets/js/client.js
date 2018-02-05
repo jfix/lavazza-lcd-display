@@ -82,7 +82,7 @@ function officeHours () {
   if (now.weekday() === 6 /* Saturday */ ||
     now.weekday() === 0 /* Sunday */ ||
     now.hours() < 6 || /* before 6am */
-    now.hours() > 21 /* after 9pm */) {
+    now.hours() > 20 /* after 9pm */) {
     return false
   }
   return true
@@ -90,7 +90,7 @@ function officeHours () {
 
 function update () {
   if (!officeHours()) {
-    setTimeout(() => { update() }, (10 * 60 * 1000)) /* wait ten minutes */
+    setTimeout(() => { update() }, (60 * 60 * 1000)) /* wait an hour */
   } else {
     const current = $('#total').text()
     $.ajax({
