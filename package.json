@@ -35,6 +35,10 @@
     "slack-webhook": "^1.0.0",
     "webpack": "^2.2.1"
   },
+  "engines": {
+    "node": "8.9.1",
+    "npm": "6.0.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jfix/lavazza-lcd-display.git"
