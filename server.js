@@ -47,7 +47,7 @@ app.get('/wally', function (req, res) {
 async function query () {
   const totalCount = Conso.count()
   const luckyNumber = LotteryTicket.findOne().sort({date: -1})
-  const tenDayStats = Conso.aggregate(tenDayAggregation)
+  const tenDayStats = Conso.aggregate(tenDayAggregation).cursor({ useMongooseAggCursor: true })
 
   let total, lucky, tenDays
   try {
