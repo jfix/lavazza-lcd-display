@@ -45,41 +45,46 @@ app.get('/wally', function (req, res) {
 // TODO: move this in a different module
 
 async function query () {
+  let total, lucky, tenDays
+
   const totalCount = Conso.count()
   const luckyNumber = LotteryTicket.findOne().sort({date: -1})
   const tenDayStats = Conso.aggregate(tenDayAggregation).option({ cursor: {} })
 
-  let total, lucky, tenDays
   try {
     [total, lucky, tenDays] = await Promise.all([
       totalCount.exec().catch(reason => console.error(reason)),
       luckyNumber.exec().catch(reason => console.error(reason)),
       tenDayStats.exec().catch(reason => console.error(reason))
     ])
+    return {
+      total,
+      lucky: lucky.ticketNumber,
+      tenDays
+    }
   } catch (e) {
     console.error('ERROR IN query: ' + JSON.stringify(e))
-  }
-  return {
-    total,
-    lucky: lucky.ticketNumber,
-    tenDays
   }
 }
 // get some data points from Mongo
 app.get('/data', function (req, res) {
-  query().then(data => {
-    const last = data.tenDays[data.tenDays.length - 1] // count, date, weekday
-    const now = moment().tz('Europe/Paris')
-    if (now.isSame(last.date, 'day')) {
-      data.today = last.count
-      data.yesterday = data.tenDays[data.tenDays.length - 2].count
-    } else {
-      data.today = 0
-      data.yesterday = last.count
-    }
-    res.setHeader('Content-Type', 'application/json')
-    res.send(data)
-  })
+  query()
+    .then(data => {
+      const last = data.tenDays[data.tenDays.length - 1] // count, date, weekday
+      const now = moment().tz('Europe/Paris')
+      if (now.isSame(last.date, 'day')) {
+        data.today = last.count
+        data.yesterday = data.tenDays[data.tenDays.length - 2].count
+      } else {
+        data.today = 0
+        data.yesterday = last.count
+      }
+      res.setHeader('Content-Type', 'application/json')
+      res.send(data)
+    })
+    .catch(err => {
+      console.log(`QUERY ERROR: ${err}`)
+    })
 })
 
 app.post('/notify-winner-slack', (req, res) => {
@@ -87,13 +92,13 @@ app.post('/notify-winner-slack', (req, res) => {
   const slack = new SlackWebhook(process.env.SLACK_WEBHOOK, slackOptions)
 
   slack.send(`And this week's winner is number .... :tada: *${req.body.number}*!\nCongratulations, come and get your free :coffee: :coffee:!`)
-  .then(
-    (body) => {
-      console.log(`Slack was correctly notified: ${body} for ${req.body.number}.`)
-      res.status(200).end()
-    },
-    (err) => {
-      console.error(`ERROR notifying Slack: ${JSON.stringify(err)}`)
-      res.status(500).end()
-    })
+    .then(
+      (body) => {
+        console.log(`Slack was correctly notified: ${body} for ${req.body.number}.`)
+        res.status(200).end()
+      },
+      (err) => {
+        console.error(`ERROR notifying Slack: ${JSON.stringify(err)}`)
+        res.status(500).end()
+      })
 })
