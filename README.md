@@ -1,5 +1,7 @@
 # Lavazza LCD Display
 
+You know you want to watch it! https://www.youtube.com/watch?v=oce7Vgq1DH8
+
 A tiny web app that gets started when the Raspberry Pi boots up to display basic information about our coffee consumption. Is related to the dash-button project that adds coffee consumptions to the database.
 
 LCD display resolution is 480x320.
