@@ -1,5 +1,6 @@
 body {
-  margin: 2em 1em;
+  margin: 0;
+  padding 0;
   background-color: black;
   font-family: monospace;
   overflow: hidden;
@@ -7,27 +8,50 @@ body {
   font-weight: bold;
 }
 
+div.slide {
+  position: relative;
+  height: 100%;
+}
+div.container {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 /* Slide 0 - today vs yesterday */
 div.daily {
   text-align: center;
   vertical-align: baseline;
-  margin: 18px 0;
+  margin: 2vw 0;
 }
 span#yesterday, span#today {
-  font-size: 18px;
-  border-bottom: 3px solid yellow;
-  padding: 10px 0;
+  font-size: 4vw;
+  border-bottom: 1vw solid yellow;
+  padding: 0.5vw 0;
 }
 span#yesterday {
-  margin-right: 20px;
+  margin-right: 6vw;
 }
 
 span#yesterday-value {
-  font-size: 75px;
+  font-size: 14vw;
 }
 
 span#today-value {
-  font-size: 130px;
+  font-size: 20vw;
+}
+
+/* slide 3 - display current time */
+div#time {
+  font-size: 12vw;
+  text-align: center;
+}
+
+div#phrase {
+  font-size: 6vw;
+  text-align: center;
+  padding: 2vw;
 }
 
 /* generic, but mostly used for overall total value and time */
@@ -39,19 +63,20 @@ h1, h2 {
 }
 
 h1 {
-  font-size: 110px;
+  margin-top: 1vw;
+  font-size: 12vw;
 }
 
-h2#time {
-  padding-top: 80px;
-  font-size: 70px;
+h1#total {
+  font-size: 14vw;
+  /* padding-top: 4vw; */
 }
 
 div.byline {
   text-align: center;
   color: white;
   font-weight: bold;
-  font-size: 150%;
+  font-size: 4vw;
 }
 
 div#lottery {
@@ -60,7 +85,7 @@ div#lottery {
   text-align: center;
   vertical-align: middle;
   font-weight: bold;
-  font-size: 150%;
+  font-size: 4vw;
 }
 
 div#lottery span.number {
@@ -69,6 +94,11 @@ div#lottery span.number {
 }
 
 /* display responsive voice licence */
+div#rs-licence {
+  position: fixed;
+  bottom: 1vw;
+  left: 1vw;
+}
 div#rs-licence, div#rs-licence a {
   color: white;
 }
