@@ -2,29 +2,37 @@ link(rel='stylesheet', href='css/style.css', type='text/css')
 link(rel='stylesheet', href='vendor/slick/slick.css', type='text/css')
 
 div.slider
-  div#slide-0
-    div.daily
-      span#yesterday Y'day
-        |
-        |
-        span#yesterday-value #{yesterday}
-      span#today Today
-        |
-        |
-        span#today-value  #{today}
+  div#slide-0.slide
+    div.container
+      div.daily
+        span#yesterday Y'day
+          |
+          |
+          span#yesterday-value #{yesterday}
+        span#today Today
+          |
+          |
+          span#today-value  #{today}
 
-  div#slide-1
-    h1#total #{total}
-    div.byline coffees served
-    div.byline since 26 Jan 2017
+  div#slide-1.slide
+    div.container
+      h1#total #{total}
+      div.byline coffees served
+      div.byline since 26 Jan 2017
 
-    div#lottery No winner yet, this week!
+      div#lottery No winner yet, this week!
 
   div#slide-2
-    canvas#ten-day-chart(width='90%' height='50%')
+    div
+      canvas#ten-day-chart(width='90%' height='50%')
 
-  div#slide-3
-    h2#time
+  div#slide-3.slide
+    div.container
+      div#time
+  
+  div#slide-4.slide
+    div.container
+      div#phrase #{phrase}
 
 audio#winner
   source(type='audio/mpeg' src='sounds/carneval-rio.mp3')

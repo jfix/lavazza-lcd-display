@@ -1,6 +1,6 @@
-import Chart from 'chart.js'
 import $ from 'jquery'
 import moment from 'moment'
+import Chart from 'chart.js'
 import '../vendor/slick/slick.min.js'
 import { responsiveVoice } from '../vendor/responsivevoice/responsivevoice.js'
 
@@ -9,11 +9,13 @@ import drawHistogram from './ten-day'
 
 let flash
 let justOnce = false
+let phrase = 'Have a coffee to find out why you like your job.'
 
 $(document).ready(function () {
   startTime()
   $('.slider').slick({
     autoplay: true,
+    autoplaySpeed: 3000,
     arrows: false,
     dots: false,
     fade: true,
@@ -79,13 +81,10 @@ function notifySlack (number) {
 
 function officeHours () {
   const now = moment()
-  if (now.weekday() === 6 /* Saturday */ ||
+  return !(now.weekday() === 6 /* Saturday */ ||
     now.weekday() === 0 /* Sunday */ ||
     now.hours() < 6 || /* before 6am */
-    now.hours() > 20 /* after 9pm */) {
-    return false
-  }
-  return true
+    now.hours() > 20 /* after 9pm */)
 }
 
 function update () {
@@ -101,7 +100,7 @@ function update () {
         if (data.total && data.total !== parseInt(current)) {
           document.title = `${data.total} coffees served`
           if (responsiveVoice) {
-            const phrase = phrases[Math.floor(Math.random() * phrases.length)]
+            phrase = phrases[Math.floor(Math.random() * phrases.length)]
             responsiveVoice.speak(`Et pour ce café ${data.total}, voila une raison d'aimer votre travail: -- Raison ${phrase}`, 'French Female')
           } else {
             console.log('ERROR: responsiveVoice was not found!')
@@ -111,6 +110,7 @@ function update () {
           $('#total').text(data.total)
           $('#today-value').text(data.today)
           $('#yesterday-value').text(data.yesterday)
+          $('#phrase').html(`Raison pour café ${data.total}:<br/><br/>"${phrase.trim()}"`)
           // do we have a winner?
           lotteryWinner(data)
           drawHistogram(data.tenDays)
