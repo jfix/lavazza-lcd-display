@@ -1,5 +1,5 @@
 const path = require('path')
-require('dotenv').config({path: path.join(__dirname, '.env')})
+require('dotenv').config({ path: path.join(__dirname, '.env') })
 
 const bodyParser = require('body-parser')
 const express = require('express')
@@ -48,7 +48,7 @@ async function query () {
   let total, lucky, tenDays
 
   const totalCount = Conso.count()
-  const luckyNumber = LotteryTicket.findOne().sort({date: -1})
+  const luckyNumber = LotteryTicket.findOne().sort({ date: -1 })
   const tenDayStats = Conso.aggregate(tenDayAggregation).option({ cursor: {} })
 
   try {

@@ -1,5 +1,3 @@
-// import Chart from 'chart.js'
-
 const drawHistogram = function (data) {
   const ctx = document.getElementById('ten-day-chart')
   const chart = new Chart(ctx, {
@@ -88,4 +86,5 @@ const drawHistogram = function (data) {
     })
   }
 }
+
 module.exports = drawHistogram
