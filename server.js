@@ -18,6 +18,7 @@ require('pug')
 
 const app = express()
 
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, 'assets')))
 app.use(emojiFavicon('coffee'))
@@ -34,6 +35,16 @@ app.listen(process.env.PORT || 5000, (err, res) => {
 /* home endpoint */
 app.get('/', function (req, res) {
   res.render(path.join(__dirname, 'views', 'index'), { total: '☕' })
+})
+
+app.get('/new', function (req, res) {
+  res.render(path.join(__dirname, 'views', 'phrase'), {})
+})
+app.post('/new', function (req, res) {
+  // TODO: create a pull request with the phrase submitted
+  const phrase = req.body.phraseInput
+  console.log(`POSTED BODY: ${JSON.stringify(phrase)}`)
+  res.render(path.join(__dirname, 'views', 'phrase'), { status: 'ok', phrase })
 })
 
 /* endpoint for wally consumption level... */
