@@ -5,7 +5,7 @@ module.exports = [
   '4. Parce qu\'on adore les placards.',
   '5. Parce qu\'on a un stagiaire de troisieme comme esclave.',
   '6. Parce qu\'on ne travaille pas avec Christophe Barbier. ',
-  '7. Parce que tant qu\'on l\'a, besoin d\'aller sur LinkedIn.',
+  '7. Parce que tant qu\'on l\'a, pas besoin d\'aller sur LinkedIn.',
   '8. Parce qu\'on vit dans les années 60.',
   '9. Parce qu\'on bosse chez Dunder Mifflin Scranton. ',
   '10. Parce qu\'on n\'est pas en contact avec le client.',
