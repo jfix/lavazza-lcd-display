@@ -11,7 +11,7 @@ $(document).ready(function () {
   $('#newPhrase').submit((evt) => {
     const phrase = $('#phraseInput').val()
     if (phrase.trim() === '' || phrase.length === 0 || phrase.length > 200) {
-      $('#info').html(`<div class='error'>Your phrase no good (too short or too long)!</div>`)
+      $('#info').html(`<div class='error'>Your phrase is no good (too short or too long)!</div>`)
       evt.preventDefault()
     }
   })
