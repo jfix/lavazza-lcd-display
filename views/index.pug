@@ -22,18 +22,26 @@ div.slider
 
       div#lottery No winner yet, this week!
 
-  div#slide-2
+  #slide-2
     div
       canvas#ten-day-chart(width='90%' height='50%')
 
-  div#slide-3.slide
-    div.container
-      div#time
+  #slide-3.slide
+    .container
+      #time
   
-  div#slide-4.slide
-    div.container
-      div#phrase #{phrase}
-
+  #slide-4.slide
+    .container
+      #phrase #{phrase}
+  
+  #slide-5.slide
+    h1.birthdays Birthdays! 🍾
+    .container
+      #birthdays 
+        p Today is #[u Blah di blah]'s birthday!
+        p Tomorow is #[u Someone Else]'s birthday!
+        p On March 25: #[u Blah D Blah]
+        p In the next two weeks: #[u Blah] on 25 March, #[u Foo] on 29 March and #[u Bar] on 31 March.
 audio#winner
   source(type='audio/mpeg' src='sounds/carneval-rio.mp3')
 

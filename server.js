@@ -12,6 +12,8 @@ const conso = require('./models/conso')
 const Conso = conso.Conso
 const tenDayAggregation = conso.tenDayAggregation
 
+const birthdays = require('./birthdays')
+
 const LotteryTicket = mongoose.model('LotteryTicket')
 const emojiFavicon = require('emoji-favicon')
 require('pug')
@@ -47,6 +49,11 @@ app.post('/new', function (req, res) {
   res.render(path.join(__dirname, 'views', 'phrase'), { status: 'ok', phrase })
 })
 
+app.get('/birthdays', async (req, res) => {
+  const bdays = await birthdays()
+  // console.log(bdays)
+  res.status(200).send( JSON.stringify(bdays, {}, 2) )
+})
 /* endpoint for wally consumption level... */
 app.get('/wally', function (req, res) {
   res.setHeader('Content-Type', 'application/json')
