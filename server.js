@@ -52,7 +52,8 @@ app.post('/new', function (req, res) {
 app.get('/birthdays', async (req, res) => {
   const bdays = await birthdays()
   // console.log(bdays)
-  res.status(200).send( JSON.stringify(bdays, {}, 2) )
+  res.setHeader('Content-Type', 'application/json')
+  res.status(200).send(bdays)
 })
 /* endpoint for wally consumption level... */
 app.get('/wally', function (req, res) {
