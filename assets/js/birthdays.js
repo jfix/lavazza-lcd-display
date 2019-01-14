@@ -1,11 +1,11 @@
-import lscache from 'lscache'
-import moment from 'moment'
+import lscache from 'lscache';
+import moment from 'moment';
 
-module.exports = () => {
+export default function() {
   try {
-    // test presence in lscache
-    let birthdays = lscache.get('birthdays')
-    if (birthdays === null) { /* local storage cache has expired */
+    // test presence in localStorage cache
+    let bdays = lscache.get('birthdays')
+    if (bdays === null) { /* local storage cache has expired */
       $.ajax({url: '/birthdays', cache: false})
       .done((data) => {
         const dayInMinutes = 24 * 60
@@ -16,12 +16,12 @@ module.exports = () => {
       })
       .fail((jqXHR, textStatus, errorThrown) => { throw Error(errorThrown) })
     } else {
-      updateBirthdays(birthdays)
+      updateBirthdays(bdays)
     }
   } catch(err) {
     console.log(err)
   }
-}
+};
 const updateBirthdays = (birthdays) => {
   Object.keys(birthdays).forEach(bucket => {
     if (!!birthdays[bucket].length) { // bucket is not empty
