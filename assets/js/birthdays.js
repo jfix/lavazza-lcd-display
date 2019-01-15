@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import lscache from 'lscache';
 import moment from 'moment';
 
@@ -23,25 +24,34 @@ export default function() {
   }
 };
 const updateBirthdays = (birthdays) => {
-  Object.keys(birthdays).forEach(bucket => {
-    if (!!birthdays[bucket].length) { // bucket is not empty
-      updateBirthdayBucket(bucket, birthdays[bucket])
-    }
-  })
-}
-
-const updateBirthdayBucket = (bucket, birthdays) => {
-  const birthdayChildrenString = getChildren(birthdays)
-  switch(bucket) {
-    case 'month':
-      `Later this month, it's also ${birthdayChildrenString} birthday.`
+  if (birthdays.today.length > 0) {
+    const b = birthdays.today
+    const l = b.length
+    const c = b.map((i) => `<u>${i.summary}</u>`)
+    const bc = formatChildren(c, true)
+    writeBirthday(`Yay, today is ${bc} birthday!`)
+  }
+  if (birthdays.tomorrow.length > 0) {
+    const b = birthdays.tomorrow
+    const l = b.length
+    const c = b.map((i) => `<u>${i.summary}</u>`)
+    const bc = formatChildren(c, true)
+    writeBirthday(`FYI, tomorrow is ${bc} birthday!`)
+  }
+  if (birthdays.week.length > 0) {
+    const b = birthdays.week
+    const l = b.length
+    const c = b.map((i) => `<u>${i.summary}</u> (${moment(i.start).format('dddd, Do MMM')})`)
+    const bc = formatChildren(c)
+    writeBirthday(`Later this week, we have the birthday${l > 1 ? 's' : ''} of ${bc}.`)
+  }
+  if (birthdays.fortnight.length > 0) {
+    // TODO
+  }
+  if (birthdays.month.length > 0) {
+    // TODO
   }
 }
 
-const getChildren = (birthdays) => {
-  if (birthdays.length === 1) return `${mkDwn(birthdays[0].summary)}'s`
-  if (birthdays.length === 2) return ``
-  return ``
-}
-
-const mkDwn = (name) => `#[u ${birthdays[0].summary}]`
+const writeBirthday = (who) => $('#birthdays').append(`<p>${who}</p>`)
+const formatChildren = (kids, addS) => kids.slice(0,-1).join(`${addS ? '\'s' : ''}, `) + ' and ' + kids[kids.length - 1] + (addS ? '\'s' : '')
