@@ -24,7 +24,7 @@ const next = (item, days) => {
     const bday = moment(item.start)
     return bday.isBefore(max) && bday.isSameOrAfter(now)
 }
-const year = (item) => next(item, 365)
+// const year = (item) => next(item, 365)
 const month = (item) => next(item, 30)
 const fortnight = (item) => next(item, 14)
 const week = (item) => next(item, 7)
@@ -44,11 +44,12 @@ module.exports = () => {
                 R.sort(byDate),
             )(data)
             // R.differenceWith: make sure we're not repeating birthdays in several time buckets
+            // R.reduce(R.concat, [], ...): need to get an array of all previous birthdays so as not to repeat them 
             const zero = R.filter(today, events)
             const one = R.differenceWith(contains, R.filter(tomorrow, events), zero)
-            const seven = R.differenceWith(contains, R.filter(week, events), one)
-            const fourteen = R.differenceWith(contains, R.filter(fortnight, events), seven)
-            const thirty = R.differenceWith(contains, R.filter(month, events), fourteen)
+            const seven = R.differenceWith(contains, R.filter(week, events), R.reduce(R.concat, [], [one, zero]))
+            const fourteen = R.differenceWith(contains, R.filter(fortnight, events), R.reduce(R.concat, [], [seven, one, zero]))
+            const thirty = R.differenceWith(contains, R.filter(month, events), R.reduce(R.concat, [], [fourteen, seven, one, zero]))
 
             resolve({
                 today: zero,
