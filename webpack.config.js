@@ -1,9 +1,12 @@
 const path = require('path')
 
 module.exports = {
-  entry: './assets/js/client.js',
+  entry: {
+    client: './assets/js/client.js',
+    phrase: './assets/js/form.js'
+  },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'assets/js')
   },
   devtool: 'cheap-module-source-map'

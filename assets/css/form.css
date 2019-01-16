@@ -1,0 +1,63 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: black;
+  font-family: monospace;
+  overflow: hidden;
+  color: green;
+  font-weight: bold;
+  position: relative;
+  height: 100%;}
+
+div.container {
+  position: absolute;
+  width: 100%;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+h1, h2, form, div#info {
+  margin: 4vw;
+}
+h1 {
+  font-size: 5vw;
+}
+h2 {
+  font-size: 2vw;
+}
+
+textarea#phraseInput {
+  font-size: 5vw;
+  background: inherit;
+  color: inherit;
+  font-family: inherit;
+  width: 100%;
+  border: 0.3vw solid green;
+}
+div.buttons {
+  text-align: right;
+  margin: 1vw 0;
+}
+input[type='button'],
+input[type='submit'] {
+  font-size: 4vw;
+  font-family: inherit;
+  background-color: green;
+  border-radius: 4px;
+  margin: 1vw;
+  border-color: green;
+}
+
+div.info, div.error {
+  padding: 1vw;
+  font-size: 3vw;
+  color: black;
+  font-family: inherit;
+  font-weight: bold;
+}
+div.info {
+  background-color: green;
+}
+div.error {
+  background-color: red;
+}

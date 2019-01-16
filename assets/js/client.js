@@ -4,6 +4,7 @@ import Chart from 'chart.js'
 import '../vendor/slick/slick.min.js'
 import { responsiveVoice } from '../vendor/responsivevoice/responsivevoice.js'
 
+import birthdays from './birthdays'
 import phrases from './cent-raisons'
 import drawHistogram from './ten-day'
 
@@ -12,6 +13,8 @@ let justOnce = false
 let phrase = 'Have a coffee to find out why you like your job.'
 
 $(document).ready(function () {
+  update()
+  birthdays()
   startTime()
   $('.slider').slick({
     autoplay: true,
@@ -125,5 +128,3 @@ function update () {
     })
   }
 }
-
-update()

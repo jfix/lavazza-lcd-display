@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  padding 0;
+  padding: 0;
   background-color: black;
   font-family: monospace;
   overflow: hidden;
@@ -67,6 +67,27 @@ h1 {
   font-size: 12vw;
 }
 
+h1.birthdays {
+  font-size: 10vw;
+  margin-top: 2vh;
+  margin-bottom: 5vh;
+  vertical-align: top;
+  text-align: center;
+}
+div#birthdays p {
+  text-align: left;
+  /* color: white; */
+  font-weight: bold;
+  font-size: 4vw;
+  /* line-height: 2vh; */
+  margin: 2vh 4vw;
+}
+
+#birthdays p u {
+  background-color: yellow;
+  color: black;
+  text-decoration: none !important;
+}
 h1#total {
   font-size: 14vw;
   /* padding-top: 4vw; */
