@@ -1,0 +1,17 @@
+link(rel='stylesheet', href='css/form.css', type='text/css')
+
+div.container
+  h1 Enter your own phrase
+  h2: em Pour le moment, du français seulement !
+  form#newPhrase(action='/new', method='post')
+    div
+      textarea(rows='3', name='phraseInput')#phraseInput
+      div.buttons
+        input#testButton(type='button', value='Test')
+        input#submitButton(type='submit', value='Submit')
+
+  div#info
+    if status
+      div.info Your phrase '#{phrase}' has been successfully submitted.
+
+script(src='js/phrase.bundle.js')

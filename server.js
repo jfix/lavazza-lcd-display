@@ -12,12 +12,15 @@ const conso = require('./models/conso')
 const Conso = conso.Conso
 const tenDayAggregation = conso.tenDayAggregation
 
+const birthdays = require('./birthdays')
+
 const LotteryTicket = mongoose.model('LotteryTicket')
 const emojiFavicon = require('emoji-favicon')
 require('pug')
 
 const app = express()
 
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, 'assets')))
 app.use(emojiFavicon('coffee'))
@@ -36,6 +39,22 @@ app.get('/', function (req, res) {
   res.render(path.join(__dirname, 'views', 'index'), { total: '☕' })
 })
 
+app.get('/new', function (req, res) {
+  res.render(path.join(__dirname, 'views', 'phrase'), {})
+})
+app.post('/new', function (req, res) {
+  // TODO: create a pull request with the phrase submitted
+  const phrase = req.body.phraseInput
+  console.log(`POSTED BODY: ${JSON.stringify(phrase)}`)
+  res.render(path.join(__dirname, 'views', 'phrase'), { status: 'ok', phrase })
+})
+
+app.get('/birthdays', async (req, res) => {
+  const bdays = await birthdays()
+  // console.log(bdays)
+  res.setHeader('Content-Type', 'application/json')
+  res.status(200).send(bdays)
+})
 /* endpoint for wally consumption level... */
 app.get('/wally', function (req, res) {
   res.setHeader('Content-Type', 'application/json')
