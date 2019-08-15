@@ -42,7 +42,7 @@ module.exports = [
   '41. Parce qu\'on est dentiste et qu\'on aime les fraises.',
   '42. Parce qu\'on est en période d\'essai. ',
   '43. Pour pouvoir dire "Merci patron". ',
-  '44. Parce que le délai pour un audience aux prud\'hommes est supérieur à deux ans.',
+  '44. Parce que le délai pour une audience aux prud\'hommes est supérieur à deux ans.',
   '45. Parce qu\'on n\'en aura pas d\'autre.',
   '46. Parce que grâce à lui, on n\'est à découvert que le 16 du mois.',
   '47. Parce qu\'on n\'est pas Claude Rich.',
@@ -98,5 +98,6 @@ module.exports = [
   '97. Parce que les notes de frais, c\'est net d\'impôt!',
   '98. Parce qu\'on est slasher, on a cinq boulots, alors forcément sur le lot ...',
   '99. Parce qu\'on est une grosse mytho.',
-  '100. Parce qu\'on est vendredi 15h, et que notre boss vient de partir.'
+  '100. Parce qu\'on est vendredi 15h, et que notre boss vient de partir.',
+  '101. Parce que tout le monde apporte de la joie au bureau. Certains quand ils arrivent, d\'autres quand ils s\'en vont.'
 ]
