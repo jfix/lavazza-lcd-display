@@ -65,6 +65,14 @@ const updateBirthdays = (birthdays) => {
     bc = formatChildren(c)
     writeBirthday(`Even further out, ${bc} will celebrate their birthday${l > 1 ? 's' : ''}.`)
   }
+
+  if (birthdays.month.length == 0
+    && birthdays.fortnight.length == 0
+    && birthdays.week.length == 0
+    && birthdays.tomorrow.length == 0
+    && birthdays.today.length == 0) {
+      writeBirthday(`<br/><p style="text-align:center">There aren't <u>any</u> birthdays<br/>in the next thirty days! :-(<br/><br/>What <u>did</u> your parents do nine months ago?!</p>`)
+  }
 }
 
 const writeBirthday = (who) => $('#birthdays').append(`<p>${who}</p>`)
