@@ -6,33 +6,33 @@ const moment = require('moment')
 const R = require('ramda')
 
 module.exports = (now = moment()) => {
-// global constants
-const url = process.env.BIRTHDAY_CALENDAR
+    // global constants
+    const url = process.env.BIRTHDAY_CALENDAR
 
-// function definitions
-const getEvents = (item) => item.type === 'VEVENT'
-const extractStuff = (item) => {
-    const d = moment(item.start)
-    return {
+    // function definitions
+    const getEvents = (item) => item.type === 'VEVENT'
+    const extractStuff = (item) => {
+        const d = moment(item.start)
+        return {
             ...R.pick(['start', 'summary'], item),
             uid: crypto.createHash('md5').update(item.uid).digest('hex'),
-        date: d.format('MM-DD'),
-        day: d.date(),
-        month: d.month() // zero-based!
-}}
-const byDate = (a, b) => moment(a.start).isSameOrBefore(moment(b.start)) ? -1 : 1
-const next = (item, days) => {
+            date: d.format('MM-DD'),
+            day: d.date(),
+            month: d.month() // zero-based!
+    }}
+    const byDate = (a, b) => moment(a.start).isSameOrBefore(moment(b.start)) ? -1 : 1
+    const next = (item, days) => {
         const max = now.clone().add(days, 'days').add(6, 'hours')
-    const bday = moment(item.start)
-    return bday.isBefore(max) && bday.isSameOrAfter(now)
-}
-// const year = (item) => next(item, 365)
-const month = (item) => next(item, 30)
-const fortnight = (item) => next(item, 14)
-const week = (item) => next(item, 7)
-const tomorrow = (item) => next(item, 1)
-const today = (item) => next(item, 0)
-const contains = (a, b) => a.uid === b.uid
+        const bday = moment(item.start)
+        return bday.isBefore(max) && bday.isSameOrAfter(now)
+    }
+    // const year = (item) => next(item, 365)
+    const month = (item) => next(item, 30)
+    const fortnight = (item) => next(item, 14)
+    const week = (item) => next(item, 7)
+    const tomorrow = (item) => next(item, 1)
+    const today = (item) => next(item, 0)
+    const contains = (a, b) => a.uid === b.uid
 
     return new Promise((resolve, reject) => {
         ics.fromURL(url, {}, (err, data) => {
