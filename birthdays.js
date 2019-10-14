@@ -22,7 +22,7 @@ const extractStuff = (item) => {
 }}
 const byDate = (a, b) => moment(a.start).isSameOrBefore(moment(b.start)) ? -1 : 1
 const next = (item, days) => {
-    const max = now.clone().add(days, 'days')
+        const max = now.clone().add(days, 'days').add(6, 'hours')
     const bday = moment(item.start)
     return bday.isBefore(max) && bday.isSameOrAfter(now)
 }
