@@ -1,4 +1,5 @@
 const path = require('path')
+const crypto = require('crypto')
 require('dotenv').config({ path: path.join(__dirname, '.env') })
 const ics = require('node-ical')
 const moment = require('moment')
@@ -13,7 +14,8 @@ const getEvents = (item) => item.type === 'VEVENT'
 const extractStuff = (item) => {
     const d = moment(item.start)
     return {
-        ...R.pick(['uid', 'start', 'summary'], item),
+            ...R.pick(['start', 'summary'], item),
+            uid: crypto.createHash('md5').update(item.uid).digest('hex'),
         date: d.format('MM-DD'),
         day: d.date(),
         month: d.month() // zero-based!
