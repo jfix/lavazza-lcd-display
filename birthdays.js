@@ -5,9 +5,9 @@ const ics = require('node-ical')
 const moment = require('moment')
 const R = require('ramda')
 
+module.exports = (now = moment()) => {
 // global constants
 const url = process.env.BIRTHDAY_CALENDAR
-const now = moment()
 
 // function definitions
 const getEvents = (item) => item.type === 'VEVENT'
@@ -34,7 +34,6 @@ const tomorrow = (item) => next(item, 1)
 const today = (item) => next(item, 0)
 const contains = (a, b) => a.uid === b.uid
 
-module.exports = () => {
     return new Promise((resolve, reject) => {
         ics.fromURL(url, {}, (err, data) => {
             if (err) return reject(err)
@@ -45,6 +44,7 @@ module.exports = () => {
                 R.map(extractStuff),
                 R.sort(byDate),
             )(data)
+
             // R.differenceWith: make sure we're not repeating birthdays in several time buckets
             // R.reduce(R.concat, [], ...): need to get an array of all previous birthdays so as not to repeat them 
             const zero = R.filter(today, events)
