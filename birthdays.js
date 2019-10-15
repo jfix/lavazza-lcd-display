@@ -23,9 +23,17 @@ module.exports = (_now) => {
     }}
     const byDate = (a, b) => moment(a.start).isSameOrBefore(moment(b.start)) ? -1 : 1
     const next = (item, days) => {
-        const max = now.clone().add(days, 'days').add(6, 'hours')
+        const max = now.clone().add(days, 'days')
         const bday = moment(item.start)
-        return bday.isBefore(max) && bday.isSameOrAfter(now)
+
+        switch(days) {
+            case 0: // today
+                return item.month === now.month() && item.day === now.date()
+            case 1: // tomorrow
+                return item.month === now.month() && item.day - now.date() === 1
+            default: // periods of several days
+                return bday.isBefore(max) && bday.isSameOrAfter(now)
+        }
     }
     // const year = (item) => next(item, 365)
     const month = (item) => next(item, 30)
