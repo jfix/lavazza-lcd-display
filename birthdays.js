@@ -54,6 +54,8 @@ module.exports = (now = moment()) => {
             const thirty = R.differenceWith(contains, R.filter(month, events), R.reduce(R.concat, [], [fourteen, seven, one, zero]))
 
             resolve({
+                currentDatetime: moment().format("DD.MM.YYYY HH:mm"),
+                argumentDatetime: ((_now instanceof moment) ? _now.format("DD.MM.YYYY HH:mm") : undefined),
                 today: zero,
                 tomorrow: one,
                 week: seven,
