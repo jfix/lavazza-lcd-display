@@ -55,6 +55,12 @@ app.get('/birthdays', async (req, res) => {
   // make sure it's a valid date string and can be converted into a valid moment object
   const date = (argDate && (moment(argDate) instanceof moment)) ? moment(argDate) : undefined
 
+  const bdays = await birthdays(date)
+
+  // TODO: if there is a birthday today, generate audio file and inject URL/filename into bdays object
+  // TODO: this is just an existing file, remove this with a reference to the real thing
+  bdays.audioFile = 'sounds/happy-birthday.mp3'
+
   res.setHeader('Content-Type', 'application/json')
   res.status(200).send(bdays)
 })
