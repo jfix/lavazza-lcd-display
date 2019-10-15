@@ -1,10 +1,11 @@
 import $ from 'jquery'
+import lscache from 'lscache';
 import moment from 'moment'
 import Chart from 'chart.js'
 import '../vendor/slick/slick.min.js'
 import { responsiveVoice } from '../vendor/responsivevoice/responsivevoice.js'
 
-import birthdays from './birthdays'
+import { checkBirthdays, happyBirthday } from './birthdays'
 import phrases from './cent-raisons'
 import drawHistogram from './ten-day'
 
@@ -13,8 +14,8 @@ let justOnce = false
 let phrase = 'Have a coffee to find out why you like your job.'
 
 $(document).ready(function () {
+  checkBirthdays()
   update()
-  birthdays()
   startTime()
   $('.slider').slick({
     autoplay: true,
@@ -126,5 +127,10 @@ function update () {
         setTimeout(function () { update() }, 4000)
       }
     })
+    // at 10am have a birthday song!
+    if (moment().format('HHmm') === '1000' 
+    && lscache.get('happyBirthday') === null) {
+      happyBirthday()
+    }
   }
 }
