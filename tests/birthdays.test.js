@@ -8,8 +8,7 @@ test('return birthday object', () => {
         expect(d).toHaveProperty('week');
         expect(d).toHaveProperty('fortnight');
         expect(d).toHaveProperty('month');
-        // is there another way to test for an array?
-        expect(d.today.length).toBeGreaterThanOrEqual(0);
+        expect(d.today instanceof Array).toBeTruthy();
     })
   });
 
