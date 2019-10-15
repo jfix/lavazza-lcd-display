@@ -5,9 +5,10 @@ const ics = require('node-ical')
 const moment = require('moment')
 const R = require('ramda')
 
-module.exports = (now = moment()) => {
+module.exports = (_now) => {
     // global constants
     const url = process.env.BIRTHDAY_CALENDAR
+    const now = (!(_now instanceof moment)) ? moment() : _now
 
     // function definitions
     const getEvents = (item) => item.type === 'VEVENT'
