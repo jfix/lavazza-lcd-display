@@ -50,8 +50,11 @@ app.post('/new', function (req, res) {
 })
 
 app.get('/birthdays', async (req, res) => {
-  const bdays = await birthdays()
-  // console.log(bdays)
+  // passed in dates are mainly for testing/debugging
+  const argDate = req.query.date // for testing '2019-10-15T22:00:00.000Z' //
+  // make sure it's a valid date string and can be converted into a valid moment object
+  const date = (argDate && (moment(argDate) instanceof moment)) ? moment(argDate) : undefined
+
   res.setHeader('Content-Type', 'application/json')
   res.status(200).send(bdays)
 })
