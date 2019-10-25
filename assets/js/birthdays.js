@@ -98,7 +98,7 @@ const updateBirthdays = (birthdays) => {
   }
 }
 
-const writeBirthday = (who, birthday = false) => $('#birthdays').append(`<p ${birthday ? 'style="text-align: center;"' :''}>${who}</p>`)
+const writeBirthday = (who, birthday) => $('#birthdays').append(`<p ${birthday ? 'style="text-align: center;"' :''}>${who}</p>`)
 const formatChildren = (kids, addS) => {
   if (kids.length === 1) return `${kids[0] + (addS ? '\'s' : '')}`
   return kids.slice(0,-1).join(`${addS ? '\'s' : ''}, `) + ' and ' + kids[kids.length - 1] + (addS ? '\'s' : '')
