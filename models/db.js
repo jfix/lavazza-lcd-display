@@ -2,8 +2,9 @@ require('dotenv').config()
 const path = require('path')
 const mongoose = require('mongoose')
 mongoose.Promise = require('q').Promise
-mongoose.connect(`mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PWD}@${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/${process.env.MONGO_DB}`, {
-  useMongoClient: true
+mongoose.connect(`mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PWD}@${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/${process.env.MONGO_DB}`, { 
+  useNewUrlParser: true ,
+  useUnifiedTopology: true 
 })
 
 // CONNECTION EVENTS

@@ -73,17 +73,17 @@ app.get('/wally', function (req, res) {
 // TODO: move this in a different module
 
 async function query () {
-  let total, lucky, tenDays
+  let total, lucky, tenDays = []
 
-  const totalCount = Conso.count()
+  const totalCount = Conso.countDocuments()
   const luckyNumber = LotteryTicket.findOne().sort({ date: -1 })
-  const tenDayStats = Conso.aggregate(tenDayAggregation).option({ cursor: {} })
-
+  const tenDayStats = Conso.aggregate(tenDayAggregation).cursor().exec()
+  
   try {
-    [total, lucky, tenDays] = await Promise.all([
+    [total, lucky] = await Promise.all([
       totalCount.exec().catch(reason => console.error(reason)),
       luckyNumber.exec().catch(reason => console.error(reason)),
-      tenDayStats.exec().catch(reason => console.error(reason))
+      tenDayStats.eachAsync(doc => tenDays.push(doc)).catch(reason => console.error(reason))
     ])
     return {
       total,
